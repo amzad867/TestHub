@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00aab9">
+  <title>Shelf - AMZ Expiry Management</title>
+  <link rel="stylesheet" href="style.css?v=6">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
+</head>
+<body data-page="shelf">
+
+<header class="header">
+  <div class="brand">
+    <a class="logo" href="index.html" title="All shelves">AMZ</a>
+    <div>
+      <h2 id="shelfTitle">Shelf</h2>
+      <p><a class="back-link" href="index.html">← All Shelves</a></p>
+    </div>
+  </div>
+  <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+</header>
+
+<main class="container">
+
+  <nav id="shelfNav" class="shelf-nav"></nav>
+
+  <section class="dashboard">
+    <div class="stat-card"><span>Total Items</span><strong id="total">0</strong></div>
+    <div class="stat-card safe"><span>Safe</span><strong id="safe">0</strong></div>
+    <div class="stat-card warning"><span>Warning</span><strong id="warning">0</strong></div>
+    <div class="stat-card urgent"><span>Urgent</span><strong id="urgent">0</strong></div>
+    <div class="stat-card overdue"><span>Overdue</span><strong id="overdue">0</strong></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title">
+      <div>
+        <h3>Expiry Monitor</h3>
+        <p id="shelfSubtitle">Live product expiry tracking</p>
+      </div>
+      <div class="panel-actions">
+        <button type="button" class="add-expiry-btn" id="toggleFormBtn" onclick="toggleExpiryForm()">+ Add New Expiry</button>
+      </div>
+    </div>
+
+    <section id="expiryFormPanel" class="expiry-form" hidden>
+      <h3>Add New Expiry Product</h3>
+      <form id="expiryForm">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="barcodeInput">Barcode / Item Number</label>
+            <input type="text" id="barcodeInput" placeholder="Enter or scan Item No" required>
+          </div>
+          <div class="form-field">
+            <label for="expiryInput">Expiry Date</label>
+            <input type="date" id="expiryInput" required>
+          </div>
+          <div class="form-field">
+            <label for="beforeInput">Before Remove</label>
+            <select id="beforeInput" required>
+              <option value="2">2 Days</option>
+              <option value="3">3 Days</option>
+              <option value="5">5 Days</option>
+              <option value="7">7 Days</option>
+              <option value="10">10 Days</option>
+              <option value="15">15 Days</option>
+              <option value="30">30 Days</option>
+              <option value="45">45 Days</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="scannerInput">Scanner / Employee Name</label>
+            <input type="text" id="scannerInput" placeholder="Enter your name">
+          </div>
+        </div>
+        <button type="submit" class="save-expiry-btn" id="submitBtn">Save Product</button>
+        <p id="formMessage"></p>
+      </form>
+    </section>
+
+    <div class="toolbar">
+      <input type="search" id="searchInput" placeholder="Search barcode...">
+      <select id="viewFilter">
+        <option value="ACTIVE">Active</option>
+        <option value="DONE">Done (Archive)</option>
+      </select>
+      <select id="statusFilter">
+        <option value="ALL">All Status</option>
+        <option value="SAFE">Safe</option>
+        <option value="WARNING">Warning</option>
+        <option value="URGENT">Urgent</option>
+        <option value="OVERDUE">Overdue</option>
+      </select>
+    </div>
+
+    <div id="loading" class="message">Loading data...</div>
+    <div id="error" class="error-message" hidden></div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Barcode</th>
+            <th>Expiry Date</th>
+            <th>Before Remove</th>
+            <th>Remove Date</th>
+            <th>Days Left</th>
+            <th>Status</th>
+            <th>Last Updated</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+    <div id="empty" class="message" hidden>No products found.</div>
+  </section>
+</main>
+
+<footer>
+  AMZ EXPIRY MANAGEMENT
+  <p>Developed by <strong class="dev-name"></strong> ·
+    <a class="wa-link footer-wa" target="_blank" rel="noopener">WhatsApp: 0576571887</a>
+  </p>
+</footer>
+
+<script src="script.js?v=6"></script>
+</body>
+</html>
