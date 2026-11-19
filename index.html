@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00aab9">
+  <title>AMZ Expiry Management</title>
+  <link rel="stylesheet" href="style.css?v=6">
+</head>
+<body data-page="main">
+
+<header class="header">
+  <div class="brand">
+    <div class="logo">AMZ</div>
+    <div>
+      <h2>Expiry Management</h2>
+      <p>Store Inventory Control</p>
+    </div>
+  </div>
+  <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">Free Tool</span>
+    <h1>Welcome to AMZ Expiry Management</h1>
+    <p>Track product expiry dates, get early warnings, and remove items on time.</p>
+    <p class="hero-by">Developed by <strong class="dev-name"></strong></p>
+    <a class="wa-btn wa-link" target="_blank" rel="noopener">
+      <span>💬</span> Contact on WhatsApp
+    </a>
+  </div>
+</section>
+
+<main class="container">
+
+  <section class="dashboard">
+    <div class="stat-card"><span>Total Items</span><strong id="total">0</strong></div>
+    <div class="stat-card safe"><span>Safe</span><strong id="safe">0</strong></div>
+    <div class="stat-card warning"><span>Warning</span><strong id="warning">0</strong></div>
+    <div class="stat-card urgent clickable" onclick="goAlerts('URGENT')"><span>Urgent</span><strong id="urgent">0</strong></div>
+    <div class="stat-card overdue clickable" onclick="goAlerts('OVERDUE')"><span>Overdue</span><strong id="overdue">0</strong></div>
+  </section>
+
+  <div id="loading" class="message">Loading data...</div>
+  <div id="error" class="error-message" hidden></div>
+
+  <section class="panel">
+    <div class="panel-title">
+      <div>
+        <h3>Shelves</h3>
+        <p>Tap a shelf to see its products</p>
+      </div>
+    </div>
+    <div id="shelfGrid" class="shelf-grid"></div>
+  </section>
+
+  <section class="panel" id="alerts">
+    <div class="panel-title">
+      <div>
+        <h3>Urgent &amp; Overdue Items</h3>
+        <p>All shelves together</p>
+      </div>
+      <div class="chip-row">
+        <button type="button" class="chip active" data-filter="ALL">All</button>
+        <button type="button" class="chip" data-filter="OVERDUE">Overdue</button>
+        <button type="button" class="chip" data-filter="URGENT">Urgent</button>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Shelf</th>
+            <th>Barcode</th>
+            <th>Expiry Date</th>
+            <th>Remove Date</th>
+            <th>Days Left</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="alertBody"></tbody>
+      </table>
+    </div>
+    <div id="alertEmpty" class="message" hidden>Kono urgent ba overdue item nai. 🎉</div>
+  </section>
+</main>
+
+<footer>
+  AMZ EXPIRY MANAGEMENT
+  <p>Automatic Expiry Monitoring System</p>
+  <p>Developed by <strong class="dev-name"></strong> ·
+    <a class="wa-link footer-wa" target="_blank" rel="noopener">WhatsApp: 0576571887</a>
+  </p>
+</footer>
+
+<script src="script.js?v=6"></script>
+</body>
+</html>
